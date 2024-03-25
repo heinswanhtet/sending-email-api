@@ -14,7 +14,7 @@ const rateLimiter = require('express-rate-limit')
 const connectDB = require('./db/connection')
 
 // routers
-
+const sendEmailRouter = require('./routes/sendEmailRoutes')
 
 // middleware
 const notFoundMiddleware = require('./middleware/not-found')
@@ -34,10 +34,10 @@ app.use(cors())
 app.use(express.json())
 
 app.get('/', (req, res) => {
-    res.send('Hello World')
+    res.send('<h1>Sending Email API</h1><a href="/email/send">Send</a>')
 })
 
-
+app.use('/email', sendEmailRouter)
 
 app.use(notFoundMiddleware)
 app.use(errorHandlerMiddleWare)
